@@ -1,0 +1,24 @@
+{
+  "name": "binance-abnormal-tradings",
+  "description": "Post Binance abnormal tradings to Discord",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "binance",
+    "discord"
+  ],
+  "author": {
+    "name": "Sergej Müller",
+    "url": "https://sergejmueller.github.io"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.1",
+    "websocket": "^1.0.33"
+  }
+}
