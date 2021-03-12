@@ -51,6 +51,7 @@ const colorize = eventType => {
             return '3066993'
         case eventType.includes('DOWN_'):
         case eventType.includes('_SELL'):
+        case eventType.includes('DROP_'):
             return '15158332'
         default:
             return 0

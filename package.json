@@ -1,7 +1,7 @@
 {
   "name": "binance-abnormal-tradings",
-  "description": "Post Binance abnormal tradings to Discord",
-  "version": "1.0.0",
+  "description": "Binance abnormal tradings on Discord",
+  "version": "1.0.1",
   "main": "index.js",
   "license": "MIT",
   "private": true,
