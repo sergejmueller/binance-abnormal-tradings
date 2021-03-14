@@ -12,6 +12,10 @@ ws.onmessage = (e) => {
         return;
     }
 
+    if (priceChange && process.env['PRICE_CHANGE_THRESHOLD'] && Math.abs(priceChange) < process.env['PRICE_CHANGE_THRESHOLD']) {
+        return;
+    }
+
     const color = colorize(eventType);
     const fields = [
         {
