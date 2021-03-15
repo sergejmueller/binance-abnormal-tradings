@@ -10,7 +10,9 @@ Subscribe to Binance Websocket to follow abnormal tradings and post updates on D
 ```
 DISCORD_WEBHOOK=https://discord.com/api/webhooks/...
 BINANCE_WEBSOCKET=wss://bstream.binance.com:9443/stream?streams=abnormaltradingnotices
+PRICE_CHANGE_THRESHOLD=0.1
 BASE_ASSET=DATA
 ```
 
-_Leave `BASE_ASSET=` blank to subscribe to all assets_
+* Leave `PRICE_CHANGE_THRESHOLD` blank to subscribe to all price changes 
+* Leave `BASE_ASSET=` blank to subscribe to all assets
