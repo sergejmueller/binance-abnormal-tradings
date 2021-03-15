@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.2.0 (2021-03-15)
+* Format volume and price change
+* Add `period` column
+
 ### 1.1.0 (2021-03-14)
 * Add price change threshold
 
