@@ -6,7 +6,7 @@ const ws = new W3CWebSocket(process.env['BINANCE_WEBSOCKET']);
 
 ws.onmessage = (e) => {
     const { data } = JSON.parse(e.data);
-    const { symbol, volume, baseAsset, eventType, priceChange } = data;
+    const { symbol, volume, baseAsset, eventType, noticeType, priceChange, period } = data;
 
     if (process.env['BASE_ASSET'] && baseAsset !== process.env['BASE_ASSET']) {
         return;
@@ -19,21 +19,31 @@ ws.onmessage = (e) => {
     const color = colorize(eventType);
     const fields = [
         {
+            "name": "Event",
+            "value": formatEvent(eventType),
+            "inline": false
+        },
+        {
             "name": "Symbol",
             "value": symbol,
             "inline": true
         },
         {
-            "name": volume ? 'Volume' : 'Price Change',
-            "value": (volume || priceChange).toString(),
-            "inline": true
-        },
-        {
-            "name": "Event",
-            "value": eventType.replaceAll('_', ' ').replace(/\d+$/, '').trim(),
+            "name": volume ? 'Volume' : 'Price',
+            "value": formatVolume(volume, baseAsset) || formatPriceChange(priceChange),
             "inline": true
         },
     ];
+
+    if (period) {
+        fields.push(
+            {
+                "name": 'Period',
+                "value": formatPeriod(period),
+                "inline": true
+            }
+        );
+    }
 
     const msg = { 'embeds': [{ color, fields }] };
 
@@ -60,4 +70,28 @@ const colorize = eventType => {
         default:
             return 0
     }
+}
+
+const formatPriceChange = value => {
+    if (!value) {
+        return null
+    }
+
+    return (Math.sign(value) > 0 ? '+' : '-') + (Math.abs(value) * 100).toFixed(2) + ' %'
+}
+
+const formatVolume = (value, baseAsset) => {
+    if (!value) {
+        return null
+    }
+
+    return `${value} ${baseAsset}`
+}
+
+const formatEvent = value => {
+    return value.replaceAll('_', ' ').replace(/\d+$/, '').trim()
+}
+
+const formatPeriod = value => {
+    return value.replace(/(\w+?)_(\d)/gm, '$2 $1')
 }
